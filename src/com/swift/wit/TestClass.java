@@ -7,8 +7,10 @@ public class TestClass {
 	wit.setDebugMode(true);
 	wit.setToken(new WitToken("", ""));
 	WitObject obj = wit.sendQuery("hello from india where I speak albanian");
+	if(obj != null){
 	System.out.println(obj.getMessageID());
 	System.out.println(obj.getIntent().getIntentName());
 	System.out.println(obj.getIntent().getEntitys().get(0).getBody());
+	}
 	}
 }

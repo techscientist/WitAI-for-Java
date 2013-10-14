@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -84,7 +82,11 @@ public WitObject sendQuery(String data){
     }
 	return new WitObject(msgID, msgBody, new WitIntent(intent, entitysList), Double.valueOf(confidence));
 	}catch(Exception e){
-	e.printStackTrace();	
+		try {
+			throw(new WitException("An error has happened."));
+		} catch (WitException e1) {
+			e1.printStackTrace();
+		}	
 	}
 	}else{
 	try {
