@@ -6,7 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -72,9 +74,14 @@ public WitObject sendQuery(String data){
 	String confidence = outcome.get("confidence").toString();
 	List<WitEntity> entitysList = new ArrayList<WitEntity>();
 	JSONObject entitys = (JSONObject)outcome.get("entities");
-	for(int i = 0; i < entitys.size(); i++){
-		
-	}
+	Iterator<?> it = entitys.entrySet().iterator();
+    while (it.hasNext()) {
+        @SuppressWarnings("rawtypes")
+		Map.Entry pairs = (Map.Entry)it.next();
+        JSONObject obj2 = (JSONObject)pairs.getValue();
+        entitysList.add(new WitEntity((String)obj2.get("value"), (String)obj2.get("body"), (long)obj2.get("start"), (long)obj2.get("end")));
+        it.remove(); // avoids a ConcurrentModificationException
+    }
 	return new WitObject(msgID, msgBody, new WitIntent(intent, entitysList), Double.valueOf(confidence));
 	}catch(Exception e){
 	e.printStackTrace();	

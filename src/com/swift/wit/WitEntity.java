@@ -2,12 +2,12 @@ package com.swift.wit;
 
 public class WitEntity {
 
-String value;
-int start;
-int end;
-String body;
+private String value;
+private long start;
+private long end;
+private String body;
 
-public WitEntity(String value, String body, int start, int end){
+public WitEntity(String value, String body, long start, long end){
 this.value = value;
 this.body = body;
 this.start = start;
@@ -19,10 +19,10 @@ return value;
 public String getBody(){
 return body;	
 }
-public int getStart(){
+public long getStart(){
 return start;	
 }
-public int getEnd(){
+public long getEnd(){
 return end;	
 }
 }
