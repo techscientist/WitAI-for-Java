@@ -72,6 +72,9 @@ public WitObject sendQuery(String data){
 	String confidence = outcome.get("confidence").toString();
 	List<WitEntity> entitysList = new ArrayList<WitEntity>();
 	JSONObject entitys = (JSONObject)outcome.get("entities");
+	for(int i = 0; i < entitys.size(); i++){
+		
+	}
 	return new WitObject(msgID, msgBody, new WitIntent(intent, entitysList), Double.valueOf(confidence));
 	}catch(Exception e){
 	e.printStackTrace();	
