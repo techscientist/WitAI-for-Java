@@ -6,6 +6,8 @@ public class TestClass {
 	Wit wit = new Wit();
 	wit.setDebugMode(true);
 	wit.setToken(new WitToken("", ""));
-	wit.sendQuery("tes");
+	WitObject obj = wit.sendQuery("hello");
+	System.out.println(obj.getMessageID());
+	System.out.println(obj.getIntent().getIntentName());
 	}
 }

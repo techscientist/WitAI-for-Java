@@ -60,22 +60,18 @@ public WitObject sendQuery(String data){
 		response.append(inputLine);
 	}
 	in.close();
+	if(isLogging){
+		System.out.println("Response JSON: "+response.toString());
+	}
 	JSONParser parser = new JSONParser();
 	JSONObject root = (JSONObject)parser.parse(response.toString());
-	JSONObject msgIDobj = (JSONObject)root.get("msg_id");
-	JSONObject msgBodyObj = (JSONObject)root.get("msg_body");
-	String msgBody = msgBodyObj.toString();
-	String msgID = msgIDobj.toString();
+	String msgBody = root.get("msg_body").toString();
+	String msgID = root.get("msg_id").toString();
 	JSONObject outcome = (JSONObject)root.get("outcome");
-	JSONObject intentObj = (JSONObject)outcome.get("intent");
-	String intent = intentObj.toString();
-	JSONObject confidenceObj = (JSONObject)outcome.get("confidence");
-	String confidence = confidenceObj.toString();
+	String intent = outcome.get("intent").toString();
+	String confidence = outcome.get("confidence").toString();
 	List<WitEntity> entitysList = new ArrayList<WitEntity>();
-	JSONArray entitys = (JSONArray)outcome.get("entities");
-	for(Object entity : entitys){
-		
-	}
+	JSONObject entitys = (JSONObject)outcome.get("entities");
 	return new WitObject(msgID, msgBody, new WitIntent(intent, entitysList), Double.valueOf(confidence));
 	}catch(Exception e){
 	e.printStackTrace();	

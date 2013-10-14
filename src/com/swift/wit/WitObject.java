@@ -2,10 +2,10 @@ package com.swift.wit;
 
 public class WitObject {
 
-String messageID;
-String messageBody;
-WitIntent intent;
-double confidence;
+private String messageID;
+private String messageBody;
+private WitIntent intent;
+private double confidence;
 
 public WitObject(String messageID, String messageBody, WitIntent intent, double confidence){
 this.messageID = messageID;
